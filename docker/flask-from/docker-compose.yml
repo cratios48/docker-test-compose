@@ -1,0 +1,21 @@
+version: "3"
+services:
+
+  counter:
+    image: jjh/flask:from
+    ports:
+      - "80:80"
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    deploy:
+      restart_policy:
+        condition: on-failure
